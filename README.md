@@ -2,7 +2,7 @@
 
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-com.lobbyvoices%2Freceptionist--toolkit-5be584)](https://registry.modelcontextprotocol.io/v0/servers?search=lobbyvoices)
 
-The official MCP server for [Lobby](https://lobbyvoices.com/developers) — the bilingual AI front desk. It gives any AI agent five **free, no-auth** receptionist tools, served remotely over Streamable HTTP. No key, no signup, no install.
+The official MCP server for [Lobby](https://lobbyvoices.com/developers) — the bilingual AI front desk. It gives any AI agent seven **free, no-auth** receptionist tools, served remotely over Streamable HTTP. No key, no signup, no install.
 
 ```
 https://lobbyvoices.com/api/mcp
