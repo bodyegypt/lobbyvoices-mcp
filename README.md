@@ -34,6 +34,8 @@ claude mcp add --transport http lobbyvoices https://lobbyvoices.com/api/mcp
 | `write_ivr_menu` | Builds a complete IVR / phone-menu script: greeting, numbered options, optional press-9 Spanish switch, operator line. |
 | `generate_elevenlabs_agent_prompt` | Generates a production-grade system prompt for an ElevenLabs conversational agent acting as a phone receptionist. |
 | `calculate_missed_call_cost` | Computes the revenue a business loses to missed calls (monthly + yearly) plus recovery math, break-even days, and ROI. |
+| `simulate_receptionist_call` | Role-play a call against the receptionist call engine — you play the caller, get the transcript, outcome, and automatic EN/ES switch back. |
+| `get_demo_call_number` | A real phone number anyone can call right now to hear the receptionist live, with suggested bilingual scripts. |
 | `should_i_hire_a_receptionist` | Scores a business's phone coverage and returns a verdict — covered, AI front desk, or hybrid — with archetype and leak numbers. |
 
 Every tool declares an `outputSchema` and returns `structuredContent`, so agents get typed JSON instead of text to parse.
