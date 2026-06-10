@@ -54,7 +54,7 @@ The same capabilities are exposed as a free, no-key HTTP API — see the [develo
 
 ## Fair use
 
-No auth required. Per-IP rate limits (~30 requests/minute per tool) and hard input caps keep the service healthy. Building something bigger on top? [Tell us](https://lobbyvoices.com/contact).
+No auth required. Per-IP rate limits (AI-backed tools: 2 requests/minute; math and template tools are generous) and hard input caps keep the service healthy. Building something bigger on top? [Tell us](https://lobbyvoices.com/contact).
 
 ## About Lobby
 
