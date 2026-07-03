@@ -1,0 +1,37 @@
+{
+  "name": "lobbyvoices-mcp",
+  "version": "1.3.0",
+  "description": "Local stdio bridge to the Lobby AI Receptionist Toolkit remote MCP server (lobbyvoices.com/api/mcp) — 8 free, no-auth receptionist tools for AI agents.",
+  "license": "MIT",
+  "author": "AGI Solutions LLC",
+  "homepage": "https://lobbyvoices.com/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bodyegypt/lobbyvoices-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bodyegypt/lobbyvoices-mcp/issues"
+  },
+  "type": "commonjs",
+  "main": "index.js",
+  "bin": {
+    "lobbyvoices-mcp": "index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "lobby",
+    "receptionist",
+    "ai-receptionist",
+    "voice-ai"
+  ],
+  "dependencies": {
+    "mcp-remote": "^0.1.38"
+  }
+}

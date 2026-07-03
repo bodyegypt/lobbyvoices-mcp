@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Syntax check
+        run: node --check index.js
+
+      - name: Smoke test — initialize + tools/list against the live remote endpoint
+        run: |
+          set -e
+          resp=$(curl -sf -X POST https://lobbyvoices.com/api/mcp \
+            -H 'content-type: application/json' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci-smoke","version":"0.0.1"}}}')
+          echo "$resp"
+          echo "$resp" | grep -q '"name":"lobbyvoices"'
+
+          tools=$(curl -sf -X POST https://lobbyvoices.com/api/mcp \
+            -H 'content-type: application/json' \
+            -d '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}')
+          count=$(node -e "process.stdout.write(String(JSON.parse(require('fs').readFileSync(0,'utf8')).result.tools.length))" <<< "$tools")
+          echo "tool count: $count"
+          test "$count" -ge 7
+          echo "$tools" | grep -q '"write_phone_script"'
+          echo "$tools" | grep -q '"calculate_missed_call_cost"'
+
+      - name: Docker build (matches Glama's build/deploy)
+        run: docker build -t lobbyvoices-mcp .

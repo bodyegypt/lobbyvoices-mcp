@@ -2,21 +2,23 @@
 
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-com.lobbyvoices%2Freceptionist--toolkit-5be584)](https://registry.modelcontextprotocol.io/v0/servers?search=lobbyvoices)
 
-The official MCP server for [Lobby](https://lobbyvoices.com/developers) — the bilingual AI front desk. It gives any AI agent seven **free, no-auth** receptionist tools, served remotely over Streamable HTTP. No key, no signup, no install.
+The official MCP server for [Lobby](https://lobbyvoices.com/developers) — the bilingual AI front desk. It gives any AI agent eight **free, no-auth** receptionist tools, served remotely over Streamable HTTP. No key, no signup.
 
 ```
 https://lobbyvoices.com/api/mcp
 ```
 
+The remote endpoint above needs nothing installed — most MCP clients (Claude Code, Cursor, Claude Desktop) can call it directly over HTTP. This repo also ships `lobbyvoices-mcp`, a tiny stdio bridge (`npx`/Docker) for clients that only support local stdio servers.
+
 ## Connect
 
-**Claude Code**
+**Claude Code** (remote, no install)
 
 ```bash
 claude mcp add --transport http lobbyvoices https://lobbyvoices.com/api/mcp
 ```
 
-**Cursor · Claude Desktop · any MCP client**
+**Cursor · Claude Desktop · any MCP client** (remote, no install)
 
 ```json
 {
@@ -25,6 +27,32 @@ claude mcp add --transport http lobbyvoices https://lobbyvoices.com/api/mcp
   }
 }
 ```
+
+**Stdio-only client — via `npx`**
+
+```json
+{
+  "mcpServers": {
+    "lobbyvoices": { "command": "npx", "args": ["-y", "lobbyvoices-mcp"] }
+  }
+}
+```
+
+**Stdio-only client — via Docker**
+
+```bash
+docker build -t lobbyvoices-mcp https://github.com/bodyegypt/lobbyvoices-mcp.git
+```
+
+```json
+{
+  "mcpServers": {
+    "lobbyvoices": { "command": "docker", "args": ["run", "-i", "--rm", "lobbyvoices-mcp"] }
+  }
+}
+```
+
+The bridge does no protocol work itself — it's the maintained [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) package pointed at the production endpoint (see [`index.js`](./index.js)).
 
 ## Tools
 
@@ -37,6 +65,7 @@ claude mcp add --transport http lobbyvoices https://lobbyvoices.com/api/mcp
 | `simulate_receptionist_call` | Role-play a call against the receptionist call engine — you play the caller, get the transcript, outcome, and automatic EN/ES switch back. |
 | `get_demo_call_number` | A real phone number anyone can call right now to hear the receptionist live, with suggested bilingual scripts. |
 | `should_i_hire_a_receptionist` | Scores a business's phone coverage and returns a verdict — covered, AI front desk, or hybrid — with archetype and leak numbers. |
+| `save_my_receptionist` | Saves a phone script, IVR menu, agent prompt, or simulated call built earlier in the conversation and emails it to the person, with the demo number and a signup link. Requires their explicit consent — only fires with `consent: true`. |
 
 Every tool declares an `outputSchema` and returns `structuredContent`, so agents get typed JSON instead of text to parse.
 
