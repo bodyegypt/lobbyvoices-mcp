@@ -28,12 +28,12 @@ claude mcp add --transport http lobbyvoices https://lobbyvoices.com/api/mcp
 }
 ```
 
-**Stdio-only client — via `npx`**
+**Stdio-only client — via `npx`** (not published to npm; installs straight from this repo)
 
 ```json
 {
   "mcpServers": {
-    "lobbyvoices": { "command": "npx", "args": ["-y", "lobbyvoices-mcp"] }
+    "lobbyvoices": { "command": "npx", "args": ["-y", "github:bodyegypt/lobbyvoices-mcp"] }
   }
 }
 ```

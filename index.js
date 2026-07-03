@@ -11,9 +11,9 @@
  * the maintained `mcp-remote` package (https://www.npmjs.com/package/mcp-remote),
  * which speaks stdio on one side and Streamable HTTP/SSE on the other.
  *
- * Usage:
- *   npx lobbyvoices-mcp
- *   node index.js
+ * Usage (not published to npm — installs straight from this repo):
+ *   npx github:bodyegypt/lobbyvoices-mcp
+ *   node index.js   (after `npm install` in a local clone)
  *
  * Env:
  *   LOBBYVOICES_MCP_URL   override the remote endpoint (default: production)
@@ -31,7 +31,7 @@ try {
   proxyBin = require.resolve("mcp-remote/dist/proxy.js");
 } catch (err) {
   console.error(
-    "[lobbyvoices-mcp] Could not find mcp-remote. Run `npm install` in this package first (or use `npx lobbyvoices-mcp`, which installs it automatically)."
+    "[lobbyvoices-mcp] Could not find mcp-remote. Run `npm install` in this package first (or use `npx github:bodyegypt/lobbyvoices-mcp`, which installs it automatically)."
   );
   process.exit(1);
 }
